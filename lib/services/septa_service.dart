@@ -9,13 +9,12 @@ class SeptaService {
         await http.get("http://www3.septa.org/hackathon/Arrivals/$station/10");
 
     if (response.statusCode == 200) {
-      var json = convert.jsonDecode('{"Departures": ' +
-          response.body.substring(response.body.indexOf('[')));
-
       // Build the train list
       var trains = List<Train>();
 
       try {
+        var json = convert.jsonDecode('{"Departures": ' +
+            response.body.substring(response.body.indexOf('[')));
         var north = json['Departures'][0]['Northbound'];
         var south = json['Departures'][1]['Southbound'];
 
